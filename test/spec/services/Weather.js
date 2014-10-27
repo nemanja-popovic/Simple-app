@@ -11,7 +11,7 @@ describe('Service: Weather', function () {
     Weather = _Weather_;
   }));
 
-  it('should do something', function () {
+  xit('should do something', function () {
     expect(!!Weather).toBe(true);
   });
 

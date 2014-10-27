@@ -2,10 +2,14 @@
 
 angular.module('HybrisApp')
   .controller('MainCtrl', ['$scope', 'Weather', '$state', function ($scope, Weather, $state) {
-      //Search object
+      //Weather object.
+      $scope.weather = { city: 'Munich', lang: 'hr' };
+      //Default city
+      $scope.search.city = 'Munich';
+      //Default language
       $scope.search.lang = { name: 'Croatian', val: 'hr' };
 
-      //Defined languages that the user can choose from
+      //Defined languages that the user can choose from.
       $scope.languages = [
          { name: 'English', val: 'en' },
          { name: 'German', val: 'de' },
@@ -13,22 +17,18 @@ angular.module('HybrisApp')
          { name: 'Ukrainian', val: 'uk' },
       ];
 
-      //If the city variable is empty make a call to server and retrive data
+      //If the city variable is empty make a call to server and retrive data.
       if (angular.isUndefined($scope.name)) {
           $scope.city = Weather.Munich.get({ lang: 'hr', q: 'Munich' });
       }
 
-      //For searching the weather for city
+      //Changing the property directive is watching. 
+      //This way the directive gets updated on button click instead of every change.
       $scope.searchCity = function () {
-          //Double checking that everything is defined
-          if (angular.isUndefined($scope.search) || angular.isUndefined($scope.search.lang) || angular.isUndefined($scope.search.city)) {
-              $scope.error = 'All parameters must be specified. Please try again.';
-          }
-          else {
-              //Making call to server
-              $scope.error = null;
-              $scope.city = Weather.Munich.get({ lang: $scope.search.lang.val, q: $scope.search.city });
-          }
+          $scope.weather = {
+              city: $scope.search.city,
+              lang: $scope.search.lang.val
+          };
       };
 
       //Opening history
