@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div ng-cloak class="well">
+                <h3>
+                    {{city.name}} -  {{city.sys.country}}
+                    <a ng-click="openHistory()" class="btn btn-primary pull-right">Forecast History</a>
+                </h3>
+
+                <p class="form-control-static"><span class="property">Sunrise at: </span>{{city.sys.sunrise | date:'HH:mm:ss'}}</p>
+
+                <p class="form-control-static"> Sunset at: {{city.sys.sunset | date:'HH:mm:ss'}}</p>
+                <div class="">
+                    <h4>Weather - {{city.weather[0].main}}</h4>
+                    <p class="alert alert-success">{{city.weather[0].description}}</p>
+                    <p class="form-control-static"> Temperature: {{city.main.temp}}</p>
+                    <p class="form-control-static"> Humidity: {{city.main.humidity}}</p>
+                    <p class="form-control-static"> Temperature min: {{city.main.temp_min}}</p>
+                    <p class="form-control-static"> Temperature max: {{city.main.temp_max}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <h3>Search for some other city</h3>
+            <form name="searchForm" novalidate ng-submit="searchCity()">
+                <div class="form-group">
+                    <label for="cityName">Email address</label>
+                    <input type="text" class="form-control" id="cityName" name="city"
+                           ng-model="search.city"
+                           placeholder="Enter name of the city" required>
+                    <span class="label label-alert" ng-show="searchForm.city.$dirty && searchForm.city.$invalid">Name of the city must be specified</span>
+                </div>
+                <div class="form-group">
+                    <label for="cityName">Email address</label>
+                    <select class="form-control" name="lang" required
+                            ng-init="search.lang = languages[0]"
+                            ng-options="item.name for item in languages"
+                            ng-model="search.lang"></select>
+                </div>
+                <button type="submit"
+                        ng-disabled="searchForm.$invalid"
+                        class="btn btn-primary btn-block">
+                    Search
+                </button>
+                <span class="label label-alert" ng-show="error">{{error}}</span>
+            </form>
+        </div>
+
+    </div>
+
+</div>
