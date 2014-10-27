@@ -18,7 +18,7 @@ angular.module('HybrisApp')
       ];
 
       //If the city variable is empty make a call to server and retrive data.
-      if (angular.isUndefined($scope.name)) {
+      if (angular.isUndefined($scope.city.name)) {
           $scope.city = Weather.Munich.get({ lang: 'hr', q: 'Munich' });
       }
 
